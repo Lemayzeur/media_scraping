@@ -1,0 +1,44 @@
+Article: string
+Url: string
+Date: date format 'd-m-Y' as string 
+
+Kidnaping mention (KNPG_M): boolean
+Total Kidnaping mention (TM_KNPG): integer
+
+Viol mention (V_M): boolean, 
+Total Viol mention (TM_V): integer
+
+Assassinat mention (ASST_M): boolean,
+Total Assassinat mention (TM_ASST): integer
+
+Jovenel mention (JVL_M): boolean,
+Total Jovenel mention (TM_JVL): integer
+
+Ou gen pou w analize done sou ensekirite nan peyi a, pou w gade nan ki nivo ensekirite ap ogmante pandan 3 dènye ane sa yo (Mas 2019 - Mas 2022).
+Sonje ou pa gen done; epi ou pap fè entèvyou, ni ou pap fè sonday. Wap baze done sa yo sou metòd skrape, sou 2 sib ki se Le Nouvelliste ak Haiti Libre.
+
+Lè w fin kolekte done yo, wap prezante yo sou modèl done sa yo:
+Article, url, date, KNPG_M, TM_KNPG, V_M, TM_V, ASST_M, TM_ASST, JVL_M TM_JVL
+
+Ekspòte done yo nan fòma csv apati de DataFrame ou kreye ak pandas.
+
+-------------------------------
+
+Lyen Lenouveliste la se: 
+	https://lenouvelliste.com/national?page=1
+	https://lenouvelliste.com/national?page=2
+Note ke "page=1" ka chanje pou w aksede tout lot lyen yo
+
+Lyen haitilibre la se: 
+	https://www.haitilibre.com/flash-infos-1.html
+	https://www.haitilibre.com/flash-infos-2.html
+Note ke "flash-infos-1" ka chanje pou w aksede tout lot lyen yo
+
+-------------------------------
+
+Pa bliye itilize antèt http "User-Agent" pou w simile yon navigatè
+Pa bliye itilize pasrèl(proxy) pou w ka kache adrès IP ou a
+
+Divize nou nan gwoup 5 moun.
+Fork projè a, epi kreye yon nouvo branch ki pote non gwoup ou a. Tout "commit"/"push" ap fèt sou repository sa, nan branch gwoup ou a.
+NB: Rasire nou ke chak moun konprann sa k fèt nan pwogram nan.
