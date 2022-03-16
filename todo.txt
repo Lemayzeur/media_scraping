@@ -2,7 +2,7 @@ Ou gen pou w analize done sou ensekirite nan peyi a, pou w gade nan ki nivo ense
 Sonje ou pa gen done; epi ou pap fè entèvyou, ni ou pap fè sonday. Wap baze done sa yo sou metòd skrape, sou 2 sib ki se Le Nouvelliste ak Haiti Libre.
 
 Lè w fin kolekte done yo, wap prezante yo sou yon modèl ak kolòn sa yo:
-[Article, url, date, KNPG_M, TM_KNPG, V_M, TM_V, ASST_M, TM_ASST, JVL_M TM_JVL]
+[Article, url, date, KNPG_M, TM_KNPG, V_M, TM_V, FSD_M, TM_FSD, ASST_M, TM_ASST, JVL_M TM_JVL]
 
 -----------------------------
 Article: string
@@ -14,6 +14,9 @@ Total Kidnapping mention (TM_KNPG): integer
 
 Viol mention (V_M): boolean, 
 Total Viol mention (TM_V): integer
+
+Fusillade mention (FSD_M): boolean, 
+Total Fusillade mention (TM_FSD): integer
 
 Assassinat mention (ASST_M): boolean,
 Total Assassinat mention (TM_ASST): integer
@@ -43,8 +46,9 @@ Pa bliye itilize pasrèl(proxy) pou w ka kache adrès IP ou a
 Pa bliye chache mo yo ak sinonim oubyen mo rapwoche
 
  1. Kidnapping, Kidnaping, Kidnapé, Kidnapper, ...
- 2. Viol, agression sexuelle, ....
- 3. Assassinat, Homicide, crime, meurtre, ....
+ 2. Viol, agression sexuelle, ...
+ 3. Fusillade, échange de tir, coup de feu, ...
+ 3. Assassinat, homicide, crime, meurtre, ...
  4. Jovenel, Jovenel Moise, Jovenel Moïse, Martine Moïse, ...
 
 Divize nou nan gwoup 5 moun.
