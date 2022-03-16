@@ -9,8 +9,8 @@ Article: string
 Url: string
 Date: date format 'd-m-Y' as string 
 
-Kidnaping mention (KNPG_M): boolean
-Total Kidnaping mention (TM_KNPG): integer
+Kidnapping mention (KNPG_M): boolean
+Total Kidnapping mention (TM_KNPG): integer
 
 Viol mention (V_M): boolean, 
 Total Viol mention (TM_V): integer
@@ -40,6 +40,12 @@ Note ke "flash-infos-1" ka chanje pou w aksede tout lot lyen yo
 
 Pa bliye itilize antèt http "User-Agent" pou w simile yon navigatè
 Pa bliye itilize pasrèl(proxy) pou w ka kache adrès IP ou a
+Pa bliye chache mo yo ak sinonim oubyen mo rapwoche
+
+ 1. Kidnapping, Kidnaping, Kidnapé, Kidnapper, ...
+ 2. Viol, agression sexuelle, ....
+ 3. Assassinat, Homicide, crime, meurtre, ....
+ 4. Jovenel, Jovenel Moise, Jovenel Moïse, Martine Moïse, ...
 
 Divize nou nan gwoup 5 moun.
 Fork projè a, epi kreye yon nouvo branch ki pote non gwoup ou a. Tout "commit"/"push" yo ap fèt sou repository sa, nan branch gwoup ou a.
