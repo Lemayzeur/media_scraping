@@ -1,3 +1,10 @@
+Ou gen pou w analize done sou ensekirite nan peyi a, pou w gade nan ki nivo ensekirite ap ogmante pandan 3 dènye ane sa yo (Mas 2019 - Mas 2022).
+Sonje ou pa gen done; epi ou pap fè entèvyou, ni ou pap fè sonday. Wap baze done sa yo sou metòd skrape, sou 2 sib ki se Le Nouvelliste ak Haiti Libre.
+
+Lè w fin kolekte done yo, wap prezante yo sou yon modèl ak kolòn sa yo:
+[Article, url, date, KNPG_M, TM_KNPG, V_M, TM_V, ASST_M, TM_ASST, JVL_M TM_JVL]
+
+-----------------------------
 Article: string
 Url: string
 Date: date format 'd-m-Y' as string 
@@ -13,14 +20,9 @@ Total Assassinat mention (TM_ASST): integer
 
 Jovenel mention (JVL_M): boolean,
 Total Jovenel mention (TM_JVL): integer
+-----------------------------
 
-Ou gen pou w analize done sou ensekirite nan peyi a, pou w gade nan ki nivo ensekirite ap ogmante pandan 3 dènye ane sa yo (Mas 2019 - Mas 2022).
-Sonje ou pa gen done; epi ou pap fè entèvyou, ni ou pap fè sonday. Wap baze done sa yo sou metòd skrape, sou 2 sib ki se Le Nouvelliste ak Haiti Libre.
-
-Lè w fin kolekte done yo, wap prezante yo sou modèl done sa yo:
-Article, url, date, KNPG_M, TM_KNPG, V_M, TM_V, ASST_M, TM_ASST, JVL_M TM_JVL
-
-Ekspòte done yo nan fòma csv apati de DataFrame ou kreye ak pandas.
+Ekspòte done yo nan fòma csv apati DataFrame anndan pandas.
 
 -------------------------------
 
@@ -40,5 +42,5 @@ Pa bliye itilize antèt http "User-Agent" pou w simile yon navigatè
 Pa bliye itilize pasrèl(proxy) pou w ka kache adrès IP ou a
 
 Divize nou nan gwoup 5 moun.
-Fork projè a, epi kreye yon nouvo branch ki pote non gwoup ou a. Tout "commit"/"push" ap fèt sou repository sa, nan branch gwoup ou a.
+Fork projè a, epi kreye yon nouvo branch ki pote non gwoup ou a. Tout "commit"/"push" yo ap fèt sou repository sa, nan branch gwoup ou a.
 NB: Rasire nou ke chak moun konprann sa k fèt nan pwogram nan.
