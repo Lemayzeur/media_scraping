@@ -1,18 +1,15 @@
+from urllib.request import Request
 import requests
-from function import getWorkingProxy
+from function import getRequest
 from bs4 import BeautifulSoup as bs
 
+url = "https://code9haiti.com/fr/courses/"
 
-p = getWorkingProxy()
-print(p)
+data = bs(getRequest(url), "html.parser")
 
-# url = "https://www.gov.uk/search/news-and-communications"
+titres = data.find_all("h6", class_="card-title bg-light border-bottom border-top p-1 bold")
+desc = data.find_all("p", class_="card-text desc f-12 gray")
 
-# res = requests.get(url)
-# data = bs(res.text, 'html.parser')
-
-# titres = data.find_all("a", class_="gem-c-document-list__item-title")
-# descriptions = data.find_all("p", class_="gem-c-document-list__item-description")
-
-# for t in titres:
-#     print(t.string)
+for t, d in zip(titres, desc):
+    print("Titre :", t.text)
+    print("Description :", d.text)
