@@ -3,13 +3,24 @@ import random
 import pandas as pd
 from bs4 import BeautifulSoup as bs
 
-free_proxy_url = '<http://proxy_list>' # TODO
+
+#Url for the list of proxy
+
+free_proxy_url = 'https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt' # TODO
 
 # get the proxy as http response
 # TODO
 
+response_proxy = requests.get(free_proxy_url)
+
 # Convert the http response to list of proxy
 # TODO
+proxy_list = response_proxy.text.strip().split("\n")
+
+
+print(proxy_list)
+
+"""
 
 def get_random_proxy(array):
 	''' get a random proxy '''
@@ -54,3 +65,5 @@ if proxy:
 	df.to_csv('<path/file_name>') # TODO
 else:
 	print('No working proxy found. Go buy some instead')
+
+"""
