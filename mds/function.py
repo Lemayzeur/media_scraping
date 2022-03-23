@@ -34,10 +34,10 @@ def get_request(url: str, proxies: dict) -> str:
             print("Request Pending ...")
             res = requests.get(url, proxies=proxies, timeout=10)
             if res.status_code == 200:
-                print("URL :", url, "| Satus Code :", res.status_code, "| Request Success !!!\n")
+                print("URL :", url, "| Satus Code :", res.status_code, "| Request Success !!!")
                 return res.text
             else:
-                print("URL :", url, "Satus Code :", res.status_code, "| Request Failed !!!\n")
+                print("URL :", url, "Satus Code :", res.status_code, "| Request Failed !!!")
         except Exception as err:
             print("Connection ERROR -", err)
             print("Request fail, new try ... -")

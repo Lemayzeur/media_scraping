@@ -21,6 +21,7 @@ while pageNumber:
         
         for el in box:
             lk = el.find('a')['href']
+            print("\t", end='')
             article = get_request(lk, proxies=proxy)
             if article:
                 dataArticle = Bs(article, "html.parser")
@@ -29,8 +30,8 @@ while pageNumber:
                 title = boxArt.find("h2").text.strip()
                 contentArt = boxArt.find("article").text.strip()
                 date = datetime.strptime(boxArt.find('small').text.strip().split(" ")[2], "%Y-%m-%d")
-                
-                if date.year >= 2019 and date.month <= 3:
+                print(date.year >= 2019)
+                if date.year >= 2019 and date.month >= 3:
                     articleList.append(
                         {
                             "Article": title,
@@ -38,15 +39,16 @@ while pageNumber:
                             "Date": datetime.strftime(date, "%d-%m-%Y")
                         }
                     )
-                    pass
                 else:
-                    pageNumber = 0
-                    break
+                    pageNumber = -1
+
     pageNumber += 1
 
 
+print("Create DataFrame ...")
 dataframe = pd.DataFrame(articleList)
 dataframe.to_csv("nouveliste.csv")
-
+print("Dataframe Save ...")
 
 print("\n\nEND SCRIPT\n\n")
+print(f"Page : {pageNumber}\n\n")
