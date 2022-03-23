@@ -1,18 +1,18 @@
 from datetime import datetime
 from bs4 import BeautifulSoup as Bs
 import pandas as pd
-from function import getRequest, getWorkingProxy
+from function import get_request, get_working_proxy
 
 host = "lenouvelliste.com"
 pathname = "national"
 
-proxy = getWorkingProxy()
+proxy = get_working_proxy()
 
 articleList = []
 pageNumber = 1
 
-while True:
-    content = getRequest(f"https://{host}/{pathname}?page={pageNumber}", proxies=proxy)
+while pageNumber:
+    content = get_request(f"https://{host}/{pathname}?page={pageNumber}", proxies=proxy)
 
     endScript = False
     if content:
@@ -21,7 +21,7 @@ while True:
         
         for el in box:
             lk = el.find('a')['href']
-            article = getRequest(lk, proxies=proxy)
+            article = get_request(lk, proxies=proxy)
             if article:
                 dataArticle = Bs(article, "html.parser")
                 boxArt = dataArticle.find("div", {"class": "content_left"})
@@ -40,7 +40,13 @@ while True:
                     )
                     pass
                 else:
-                    endScript = True
+                    pageNumber = 0
+                    break
+    pageNumber += 1
 
-    if not endScript:
-        pageNumber += 1
+
+dataframe = pd.DataFrame(articleList)
+dataframe.to_csv("nouveliste.csv")
+
+
+print("\n\nEND SCRIPT\n\n")
