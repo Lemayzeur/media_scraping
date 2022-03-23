@@ -1,2 +1,2 @@
-# Media Scraping
-Scrap media websites to real data on predefined keywords
+# News Websites Scraping
+Scrap news websites to get real data on some predefined keywords (in french): kidnapping, meurtre, viol, assassinat, fusillade
