@@ -1,15 +1,46 @@
-from urllib.request import Request
-import requests
-from function import getRequest
-from bs4 import BeautifulSoup as bs
+from datetime import datetime
+from bs4 import BeautifulSoup as Bs
+import pandas as pd
+from function import getRequest, getWorkingProxy
 
-url = "https://code9haiti.com/fr/courses/"
+host = "lenouvelliste.com"
+pathname = "national"
 
-data = bs(getRequest(url), "html.parser")
+proxy = getWorkingProxy()
 
-titres = data.find_all("h6", class_="card-title bg-light border-bottom border-top p-1 bold")
-desc = data.find_all("p", class_="card-text desc f-12 gray")
+articleList = []
+pageNumber = 1
 
-for t, d in zip(titres, desc):
-    print("Titre :", t.text)
-    print("Description :", d.text)
+while True:
+    content = getRequest(f"https://{host}/{pathname}?page={pageNumber}", proxies=proxy)
+
+    endScript = False
+    if content:
+        data = Bs(content, "html.parser")
+        box = data.find_all('div', {'class': 'content_widget'})
+        
+        for el in box:
+            lk = el.find('a')['href']
+            article = getRequest(lk, proxies=proxy)
+            if article:
+                dataArticle = Bs(article, "html.parser")
+                boxArt = dataArticle.find("div", {"class": "content_left"})
+                
+                title = boxArt.find("h2").text.strip()
+                contentArt = boxArt.find("article").text.strip()
+                date = datetime.strptime(boxArt.find('small').text.strip().split(" ")[2], "%Y-%m-%d")
+                
+                if date.year >= 2019 and date.month <= 3:
+                    articleList.append(
+                        {
+                            "Article": title,
+                            "Url": lk,
+                            "Date": datetime.strftime(date, "%d-%m-%Y")
+                        }
+                    )
+                    pass
+                else:
+                    endScript = True
+
+    if not endScript:
+        pageNumber += 1

@@ -3,7 +3,7 @@ from random import choice
 
 PROXY_LIST_URL = "https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt"
 
-def getRandomProxy(proxyList) -> dict:
+def getRandomProxy(proxyList:list) -> dict:
     return {"http": choice(proxyList)}
 
 def getWorkingProxy()-> dict:
@@ -12,7 +12,7 @@ def getWorkingProxy()-> dict:
 
     print("Getting Working Proxy ...")
     
-    for _ in range(20):
+    while True:
         proxy = getRandomProxy(proxyList)
         print("Trying proxy :", proxy['http'], "...")
 
@@ -25,15 +25,16 @@ def getWorkingProxy()-> dict:
             print("Proxy", proxy['http'], "not working, new try ...\n")
 
 
-def getRequest(url):
-    proxy = getWorkingProxy()
+def getRequest(url:str, proxies:dict) -> str:
     for _ in range(5):
         try:
             print("Request Pending ...")
-            res = requests.get(url, proxies=proxy, timeout=10)
+            res = requests.get(url, proxies=proxies, timeout=10)
             if(res.status_code == 200):
                 print("URL :", url,"| Satus Code :", res.status_code, "| Request Success !!!\n")
                 return res.text
-        except:
-            print("Request fail, new try ...")
-    print("URL :", url,"Satus Code :", res.status_code, "| Request Failed !!!\n")
+            else:
+                print("URL :", url,"Satus Code :", res.status_code, "| Request Failed !!!\n")
+        except Exception as err:
+            print("Connection ERROR -", err)
+            print("Request fail, new try ... -")
