@@ -68,20 +68,20 @@ def count_words(url, liste):
 #     else:
 #         return True    
     
-nombres_pages = 3					
+nombres_pages = 2					
 # res = requests.get('https://lenouvelliste.com/national?page=1', headers=headers, proxies=p) # TODO
 # print(res.text)
 upperframe=[]  
 for page in range(0,nombres_pages):
 	if proxy:
 		prox = get_working_proxy()
-		res = requests.get('https://lenouvelliste.com/national?page='+str(page+1), headers=headers, proxies=prox) # TODO
+		res = requests.get('https://www.haitilibre.com/flash-infos-'+str(page+1), headers=headers, proxies=prox) # TODO
 		# print(res.text)
         
 		soup = bs(res.text, 'html.parser') 
         
         
-		lien = soup.find_all('a', attrs={'class':'mrf-buttonOpacityLight mrf-button mrf-buttonArticle mrf-hidden-link'})
+		lien = soup.find_all('a')
 		lien = [link.get('href') for link in lien]
 		filename="nouvel.csv"
 		frame = []
