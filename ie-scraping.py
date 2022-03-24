@@ -10,7 +10,7 @@ free_proxy_url = '<http://proxy_list>' # TODO
 
 # Convert the http response to list of proxy
 # TODO
-
+#test commit
 def get_random_proxy(array):
 	''' get a random proxy '''
 	proxy = random.choice(array)
