@@ -66,6 +66,10 @@ keywordList = [
 
 pages = 10
 dataset = []
+
+# def booleanMention():
+
+
 if proxy:
     # hit the target site
     for page in range(0, pages):
@@ -79,10 +83,11 @@ if proxy:
             for titleText in content.find_all('a', href=True):
                 for link in range(0, len(keywordList)):
                     if keywordList[link] in titleText["href"]:
-                        keywordLink = requests.get(titleText["href"])
-                        keywordResponse = bs(keywordLink, 'html.parser')
                         print(f' href content: {titleText["href"]}')
-
+                        keywordLink = requests.get(titleText["href"])
+                        linkResponse = bs(keywordLink.text, 'html.parser')
+                        date = linkResponse.find('div', class_='detail_content_area').find('small').text[10:21].strip()
+                        print(date)
             articleTitle = titleText.contents[0]
             for keyword in range(0, len(keywordList)):
                 if keywordList[keyword] in articleTitle:
@@ -95,4 +100,4 @@ if proxy:
     # df.to_csv('<path/file_name>') # TODO
 
 # else:
-# 	print('No working proxy found. Go buy some instead'
+# 	print('No working proxy found. Go buy some instead')
