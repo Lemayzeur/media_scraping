@@ -1,7 +1,8 @@
 import requests
 import random
-import pandas as pd
+import csv
 from bs4 import BeautifulSoup as bs
+import re
 
 
 #Url for the list of proxy
@@ -63,35 +64,94 @@ proxy = get_working_proxy()
 #print(proxy)
 
 
-url_list = ["https://lenouvelliste.com/","https://www.haitilibre.com/"]
+#url_leNouvelliste = "https://lenouvelliste.com/national?"
 
-keyWords = ["kidnapping","Kidnapping","kidnape","Kidnape","kidnaper","Kidnaper","Viol","viol","agression sexuelle","Agression sexuelle","Agressions sexuelles","agressions sexuelles",
-"Fusillade","fusillade","Echange de tirs","echange de tirs","Coup de feu","coup de feu","Assassinat","assassinat","crime","Crime","meurtre","meurtres","Meurtre","Meurtres",
-"Jovenel","Jovenel Moise","Martine","Martine Moise"]
+
+
+#"https://www.haitilibre.com/"
+
+keyWords = ["kidnapping","Kidnapping","séquestration","Séquestration","rançon","Rançon","kidnapé","Kidnapé","kidnaper","Kidnapée","kidnapée","Kidnaper","Viol","viol","agression sexuelle","Agression sexuelle","Agressions sexuelles","agressions sexuelles",
+"Fusillade","fusillade","Echange de tirs","échange de tirs","Coup de feu","coup de feu","Assassinat","assassinat","Assassiné","assassineé","Assassinée","assassinée","Assassiner","assassiner","crime","Crime","meurtre",
+"meurtres","Meurtre","Meurtres","Jovenel","Jovenel Moise","Jovenel Moïse","Martine","Martine Moise","Martine Moïse","assassin"]
+
+Articles = []
+url = []
+
 
 if proxy:
 
-	for site in url_list:
-		res = requests.get(site, headers=headers, proxies=proxy) # TODO
+	for i in range(1,2585):
 
-		resContents = res.content
-
-		#htmlContent = res.content
-
-		print(resContents)
-
-		# init the beautiful instance as html parser
-
-		#soup = bs(resContents,'html.parser') # TODO
 	
+		resNouv = requests.get("https://lenouvelliste.com/national?page={0}".format(i), headers=headers, proxies=proxy) # TODO
+
+		NouvellisteContents = resNouv.content
+
+		#print(NouvellisteContents)
+
+
 	
+		soup = bs(NouvellisteContents,'html.parser')
+
+		divNouvArticles = soup.find_all("div", {"class" : "content_widget"})
+
+		for div in divNouvArticles:
+
+			titleNouvArticles = div.find("h2")
+
+			for title in titleNouvArticles:
+				for word in keyWords:
+					if word in title.string:
+						Articles.append(title.string)
+						url.append(title)
+
+
+						
+header = ["Articles","Url"]
+
+with open('dataInfo.csv','w') as dataInfo_csv:
+
+	writer = csv.writer(dataInfo_csv,delimiter=',')
+
+	writer.writerow(header)
+
+
+	for article,url in zip(Articles,url):
+		row = [article,url]
+		writer.writerow(row)
+				
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+
+		
+
+		
 """
-	# After collecting the data needed, convert it to pandas dataframe
-  # TODO
-
-	# then export it as csv
-	df.to_csv('<path/file_name>') # TODO
-else:
+	
+	else:
 	print('No working proxy found. Go buy some instead')
 
 """
