@@ -54,3 +54,18 @@ Pa bliye chache mo yo ak sinonim oubyen mo rapwoche
 Divize nou nan gwoup 5 moun.
 Fork projè a, epi kreye yon nouvo branch ki pote non gwoup ou a. Tout "commit"/"push" yo ap fèt sou repository sa, nan branch gwoup ou a.
 NB: Rasire nou ke chak moun konprann sa k fèt nan pwogram nan.
+
+
+
+				for div in divList:
+					lien = div.find("a")["href"]
+					article = div.find('p').text
+
+
+
+					for div in divList:
+    					titre_liste = div.find('h2')
+					for titre in titre_liste:
+						titre_liste.append(titre)
+						titre_liste = titre.text
+					print(titre_liste)
