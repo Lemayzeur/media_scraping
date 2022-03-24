@@ -28,11 +28,11 @@ def get_working_proxy() -> dict:
             print("Proxy", proxy['http'], "not working, new try ...\n")
 
 
-def get_request(url: str, proxies: dict) -> str:
+def get_request(url: str, proxy: dict) -> str:
     for _ in range(5):
         try:
-            print("Request Pending ...")
-            res = requests.get(url, proxies=proxies, timeout=10)
+            print("Request Pending ... ", end="")
+            res = requests.get(url, proxies=proxy, timeout=10)
             if res.status_code == 200:
                 print("URL :", url, "| Satus Code :", res.status_code, "| Request Success !!!")
                 return res.text
