@@ -1,31 +1,26 @@
-from bs4 import BeautifulSoup as Bs
-from function import get_request, get_working_proxy
+import os
+import pandas as pd
+from media import hl_parser, ln_parser
 
-proxy = get_working_proxy()
+hosts = ("lenouvelliste.com", "www.haitilibre.com")
 
+data_set = []
+data = []
 paj = 1
-while paj <= 1:
-    content = get_request(f"https://www.haitilibre.com/flash-infos-{paj}.html", proxy=proxy)
-    data = Bs(content, "html.parser")
-    lista = data.find_all('td', {'class': 'text', 'valign': 'top', 'align': 'left'})
 
-    for td in lista:
-        link = td.find('a')['href']
+for host in hosts:
+    if host == "www.haitilibre.com":
+        url = f"https://{host}/flash-infos-{paj}.html"
+        data = hl_parser(url)
+    elif host == "lenouvelliste.com":
+        url = f"https://{host}/national?page={paj}"
+        data = ln_parser(url)
 
-        if "www.icihaiti.com" not in link:
-            url = f"https://www.haitilibre.com{link}"
-        else:
-            url = link
+    data_set.extend(data[0])
 
-        article = get_request(url, proxy=proxy)
+    print(f"Creating {host} DataFrame ...")
+    dataframe = pd.DataFrame(data_set)
+    dataframe.to_csv(f"./test_{host}.csv")
+    print("Dataframe Save ...\n\n")
 
-        if article:
-            data_art = Bs(article, "html.parser")
-
-            titre = data_art.find('span', {'class': 'titre16color'}).text.strip()
-            date = data_art.find('span', {'class': 'date'}).text.strip()
-
-            print(f"{titre}\n{date}\n\n")
-
-    paj += 1
-
+print("\n\nEND SCRIPT\n\n")
